@@ -39,10 +39,11 @@ WELCOME_TEXT = (
 )
 
 def get_category_keyboard():
-    buttons = [InlineKeyboardButton(text=name, callback_data=key) for key, name in CATEGORIES.items()]
-    keyboard = InlineKeyboardMarkup(row_width=2)
-    keyboard.add(*buttons)
-    return keyboard
+    buttons = [
+        [InlineKeyboardButton(text=name, callback_data=key)]
+        for key, name in CATEGORIES.items()
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=buttons)
 
 @dp.message(CommandStart())
 async def cmd_start(message: Message):
@@ -88,5 +89,5 @@ async def handle_proposal(message: Message):
 async def reject_other_formats(message: Message):
     await message.reply("⚠️ Пожалуйста, отправляйте только текст или фотографии. Другие форматы не принимаются.")
 
-if __name__ == "__main__":
+if name == "main":
     asyncio.run(dp.start_polling(bot))
