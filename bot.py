@@ -55,10 +55,22 @@ async def category_chosen(callback: CallbackQuery):
     category_key = callback.data
     user_id = callback.from_user.id
     user_category[user_id] = category_key
+    back_button = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="↩️ Выбрать другую категорию", callback_data="change_category")]
+        ]
+    )
     await callback.message.edit_text(
         f"Вы выбрали категорию: {CATEGORIES[category_key]}\n\n"
-        "Теперь отправьте ваше предложение в виде текста или фотографии."
+        "Теперь отправьте ваше предложение в виде текста или фотографии.",
+        reply_markup=back_button
     )
+    await callback.answer()
+
+@dp.callback_query(F.data == "change_category")
+async def change_category(callback: CallbackQuery):
+    user_category.pop(callback.from_user.id, None)
+    await callback.message.edit_text(WELCOME_TEXT, reply_markup=get_category_keyboard())
     await callback.answer()
 
 @dp.message(F.content_type.in_([ContentType.TEXT, ContentType.PHOTO]))
