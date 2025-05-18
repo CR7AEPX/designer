@@ -7,7 +7,7 @@ from aiogram.filters.command import CommandStart
 from aiogram.client.default import DefaultBotProperties
 from datetime import datetime, timedelta
 
-API_TOKEN = '7205740012:AAFfKskSgdLAiVCtR59D-rV0Eyk1cGVu6mA'
+API_TOKEN = '7805117897:AAHZEdLRvtBlIPrrvxKaE1YYOTEk4o3MRdo'
 ADMIN_ID = 7646706120
 
 logging.basicConfig(level=logging.INFO)
