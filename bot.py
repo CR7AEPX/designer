@@ -89,5 +89,5 @@ async def handle_proposal(message: Message):
 async def reject_other_formats(message: Message):
     await message.reply("⚠️ Пожалуйста, отправляйте только текст или фотографии. Другие форматы не принимаются.")
 
-if name == "main":
+if __name__ == "__main__":
     asyncio.run(dp.start_polling(bot))
